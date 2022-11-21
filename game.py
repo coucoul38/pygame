@@ -1,4 +1,5 @@
 #Simple pygame program
+# TUTORIAL : https://realpython.com/pygame-a-primer/
 
 import pygame
 pygame.init()
