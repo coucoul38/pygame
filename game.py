@@ -13,3 +13,12 @@ while running:
     for events in pygame.event.get():
         if events.type == pygame.QUIT:
             running=False
+
+    #Fill the background in pink
+    screen.fill((255, 100, 203))
+
+    pygame.draw.circle(screen, (0,0,255), (250, 250), 75)
+
+    pygame.display.flip()
+
+pygame.quit()
