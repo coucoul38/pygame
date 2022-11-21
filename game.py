@@ -15,10 +15,11 @@ while running:
             running=False
 
     #Fill the background in pink
-    screen.fill((255, 100, 203))
+    screen.fill((255, 255, 255))
 
-    pygame.draw.circle(screen, (0,0,255), (250, 250), 75)
+    pygame.draw.circle(screen, (250,0,0), (250, 250), 75)
 
+    #push to display
     pygame.display.flip()
 
 pygame.quit()
