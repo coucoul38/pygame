@@ -1,6 +1,7 @@
 import pygame
+import pygame.time
 pygame.init()
-
+clock = pygame.time.Clock()
 
 # Set up the drawing window
 displayHeight = 1080
@@ -24,13 +25,32 @@ player2yVelocity = 0
 player2xVelocity = 0
 img_player2 = pygame.image.load("img/cat3.jpg")
 
-playersSpeed = 2
+#other
+img_shield2 = pygame.image.load("img/shield.png")
+shieldCopy = img_shield2.copy()
+img_shield = pygame.transform.flip(shieldCopy, True, False)
+
+img_sword = pygame.image.load("img/woodenSword.png")
+swordCopy = img_sword.copy()
+img_sword2 = pygame.transform.flip(swordCopy, True, False)
+
+
+playersSpeed = 10
 
 pygame.display.set_caption("The Battle Cats")
+
+def player1atk():
+    print("player 1 attacks !")
+    screen.blit(img_sword, (player1x, player1y))
+    pygame.display.update()
+
+def player2atk():
+    print("player 2 attacks !")
 
 #Run until the player quits
 running = True
 while running:
+    clock.tick(60)
     #Did the user clicked the close button ?
     for events in pygame.event.get():
         if events.type == pygame.QUIT:
@@ -38,6 +58,10 @@ while running:
         elif events.type == pygame.KEYDOWN:
             if events.key == pygame.K_ESCAPE:
                 running=False
+            if events.key == pygame.K_e:
+                player1atk()
+            if events.key == pygame.K_KP_4:
+                player2atk()
     
     pressed = pygame.key.get_pressed()
     #PLAYER 1 Y
@@ -77,8 +101,8 @@ while running:
     player2x = player2x + player2xVelocity
     player2y = player2y + player2yVelocity
 
-    #Stop players from getting out of the screen
-    # PLAYER 1
+    # BOUNDING BOX
+    # Player 1
     if player1x > displayWidth - player1size:
         player1x = displayWidth - player1size
     elif player1x < 0 :
@@ -87,7 +111,7 @@ while running:
         player1y = displayHeight - player1size
     elif player1y < 0 :
         player1y = 0
-    # PLAYER 2
+    # Player 2
     if player2x > displayWidth - player1size:
         player2x = displayWidth - player1size
     elif player2x < 0 :
