@@ -34,22 +34,15 @@ img_sword = pygame.image.load("img/woodenSword.png")
 swordCopy = img_sword.copy()
 img_sword2 = pygame.transform.flip(swordCopy, True, False)
 
-
 playersSpeed = 10
 
+
 pygame.display.set_caption("The Battle Cats")
-
-def player1atk():
-    print("player 1 attacks !")
-    screen.blit(img_sword, (player1x, player1y))
-    pygame.display.update()
-
-def player2atk():
-    print("player 2 attacks !")
 
 #Run until the player quits
 running = True
 while running:
+    # run the game at a constant 60fps
     clock.tick(60)
     #Did the user clicked the close button ?
     for events in pygame.event.get():
@@ -58,10 +51,13 @@ while running:
         elif events.type == pygame.KEYDOWN:
             if events.key == pygame.K_ESCAPE:
                 running=False
+            #Player 1 ATTACK
             if events.key == pygame.K_e:
-                player1atk()
+                print("player 1 attacks")
+            #Player 2 ATK
             if events.key == pygame.K_KP_4:
-                player2atk()
+                screen.blit(img_sword,(player2x+10, player2y))
+                print("player 2 attacks")
     
     pressed = pygame.key.get_pressed()
     #PLAYER 1 Y
@@ -124,6 +120,8 @@ while running:
     screen.fill(backgroundColor)
     screen.blit(img_player1,(player1x, player1y))
     screen.blit(img_player2,(player2x, player2y))
+    screen.blit(img_sword,(player1x+50, player1y-10))
+    screen.blit(img_sword2,(player2x+50, player2y-10))
 
     pygame.display.update()
 pygame.quit()
