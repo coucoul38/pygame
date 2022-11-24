@@ -30,14 +30,30 @@ img_shield2 = pygame.image.load("img/shield.png").convert_alpha()
 shieldCopy = img_shield2.copy()
 img_shield = pygame.transform.flip(shieldCopy, True, False)
 
+size_sword = (110,110)
 img_sword = pygame.image.load("img/woodenSword.png").convert_alpha()
+img_sword = pygame.transform.scale(img_sword, size_sword)
 swordCopy = img_sword.copy()
 img_sword2 = pygame.transform.flip(swordCopy, True, False)
 
 playersSpeed = 10
 
 
+def atk(player):
+    global img_sword
+    global img_sword2d
+    if player == "player1":
+        print("player 1 attacks")
+        
+        #for rotation in range(90):
+        #    img_sword = pygame.transform.rotate(img_sword, rotation)
+        #for rotationBack in range(90):
+        #    img_sword = pygame.transform.rotate(img_sword, -rotationBack)
+
 pygame.display.set_caption("The Battle Cats")
+
+player1atk = False
+wait = 0
 
 #Run until the player quits
 running = True
@@ -53,10 +69,11 @@ while running:
                 running=False
             #Player 1 ATTACK
             if events.key == pygame.K_e:
-                print("player 1 attacks")
+                atk("player1")
+                player1atk=True
+                wait = 60
             #Player 2 ATK
             if events.key == pygame.K_KP_4:
-                screen.blit(img_sword,(player2x+10, player2y))
                 print("player 2 attacks")
     
     pressed = pygame.key.get_pressed()
@@ -120,8 +137,11 @@ while running:
     screen.fill(backgroundColor)
     screen.blit(img_player1,(player1x, player1y))
     screen.blit(img_player2,(player2x, player2y))
-    screen.blit(img_sword,(player1x+50, player1y-10))
-    screen.blit(img_sword2,(player2x+50, player2y-10))
-
+    if player1atk :
+        screen.blit(img_sword,(player1x+80, player1y-10))
+    screen.blit(img_sword2,(player2x-80, player2y-10))
+    wait = wait -1
+    if wait == 0 :
+        player1atk=False
     pygame.display.update()
 pygame.quit()
