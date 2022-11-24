@@ -23,7 +23,7 @@ player2x = displayWidth-player2size
 player2y = displayHeight-player2size
 player2yVelocity = 0
 player2xVelocity = 0
-img_player2 = pygame.image.load("img/cat3.jpg")
+img_player2 = pygame.image.load("img/cat2.jpg")
 
 #other
 img_shield2 = pygame.image.load("img/shield.png").convert_alpha()
@@ -35,15 +35,19 @@ img_sword = pygame.image.load("img/woodenSword.png").convert_alpha()
 img_sword = pygame.transform.scale(img_sword, size_sword)
 swordCopy = img_sword.copy()
 img_sword2 = pygame.transform.flip(swordCopy, True, False)
+atkTime = 30 #1sec = 60fps
+atkCooldown = 60
 
 playersSpeed = 10
 
 
 def atk(player):
     global img_sword
-    global img_sword2d
+    global img_sword2
     if player == "player1":
         print("player 1 attacks")
+    if player == "player2":
+        print("player 2 attacks")
         
         #for rotation in range(90):
         #    img_sword = pygame.transform.rotate(img_sword, rotation)
@@ -53,7 +57,9 @@ def atk(player):
 pygame.display.set_caption("The Battle Cats")
 
 player1atk = False
-wait = 0
+player2atk = False
+atkTimeP1 = 0
+atkTimeP2 = 0
 
 #Run until the player quits
 running = True
@@ -71,10 +77,12 @@ while running:
             if events.key == pygame.K_e:
                 atk("player1")
                 player1atk=True
-                wait = 60
+                atkTimeP1 = atkTime
             #Player 2 ATK
             if events.key == pygame.K_KP_4:
-                print("player 2 attacks")
+                atk("player2")
+                player2atk = True
+                atkTimeP2 = atkTime
     
     pressed = pygame.key.get_pressed()
     #PLAYER 1 Y
@@ -134,14 +142,22 @@ while running:
     elif player2y < 0 :
         player2y = 0
 
+    #Draw players
     screen.fill(backgroundColor)
     screen.blit(img_player1,(player1x, player1y))
     screen.blit(img_player2,(player2x, player2y))
+
+    #Draw swords
     if player1atk :
         screen.blit(img_sword,(player1x+80, player1y-10))
-    screen.blit(img_sword2,(player2x-80, player2y-10))
-    wait = wait -1
-    if wait == 0 :
+    if player2atk :
+        screen.blit(img_sword2,(player2x-80, player2y-10))
+
+    atkTimeP1 = atkTimeP1 -1
+    atkTimeP2 = atkTimeP2 -1
+    if atkTimeP1 == 0 :
         player1atk=False
+    if atkTimeP2 == 0 :
+        player2atk=False
     pygame.display.update()
 pygame.quit()
