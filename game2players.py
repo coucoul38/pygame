@@ -145,14 +145,14 @@ while running:
     elif player2y < 0 :
         player2y = 0
 
-    #Draw players
+    #Draw 
     screen.fill(backgroundColor)
+    #P1
     screen.blit(img_player1,(player1x, player1y))
-    screen.blit(img_player2,(player2x, player2y))
-
-    #Draw swords
     if player1atk :
         screen.blit(img_sword,(player1x+80, player1y-10))
+    #P2
+    screen.blit(img_player2,(player2x, player2y))
     if player2atk :
         screen.blit(img_sword2,(player2x-80, player2y-10))
 
