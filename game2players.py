@@ -37,6 +37,7 @@ swordCopy = img_sword.copy()
 img_sword2 = pygame.transform.flip(swordCopy, True, False)
 atkTime = 30 #1sec = 60fps
 atkCooldown = 60
+atkDmg = 10
 
 playersSpeed = 10
 
@@ -60,6 +61,8 @@ player1atk = False
 player2atk = False
 atkTimeP1 = 0
 atkTimeP2 = 0
+player1hp = 100
+player2hp = 100
 
 #Run until the player quits
 running = True
