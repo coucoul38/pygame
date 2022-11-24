@@ -26,11 +26,11 @@ player2xVelocity = 0
 img_player2 = pygame.image.load("img/cat3.jpg")
 
 #other
-img_shield2 = pygame.image.load("img/shield.png")
+img_shield2 = pygame.image.load("img/shield.png").convert_alpha()
 shieldCopy = img_shield2.copy()
 img_shield = pygame.transform.flip(shieldCopy, True, False)
 
-img_sword = pygame.image.load("img/woodenSword.png")
+img_sword = pygame.image.load("img/woodenSword.png").convert_alpha()
 swordCopy = img_sword.copy()
 img_sword2 = pygame.transform.flip(swordCopy, True, False)
 
